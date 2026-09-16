@@ -14,6 +14,11 @@ python3Packages.buildPythonApplication (finalAttrs: {
     hash = "sha256-8n0PW0Nc/+5/qdU3eCG1ZBHg8/RfgbNe9pvT/6RgpPQ=";
   };
 
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail 'hatchling<1.31' 'hatchling'
+  '';
+
   build-system = with python3Packages; [
     hatchling
   ];
