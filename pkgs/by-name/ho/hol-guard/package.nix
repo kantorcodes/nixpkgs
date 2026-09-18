@@ -2,6 +2,7 @@
   lib,
   fetchurl,
   python3Packages,
+  versionCheckHook,
 }:
 
 python3Packages.buildPythonApplication (finalAttrs: {
