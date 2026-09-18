@@ -43,6 +43,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
   pythonRelaxDeps = [
     "idna"
     "publicsuffixlist"
+    "rich"
   ];
 
   nativeCheckInputs = with python3Packages; [
