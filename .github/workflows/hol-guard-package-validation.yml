@@ -1,0 +1,29 @@
+name: HOL Guard package validation
+
+on:
+  push:
+    branches:
+      - ci/hol-guard-nix-validate-20260917
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24
+
+      - name: Build and execute HOL Guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$(nix-build -A hol-guard)"
+          test -x "$out/bin/hol-guard"
+          "$out/bin/hol-guard" --version
+          "$out/bin/hol-guard" --help >/dev/null
